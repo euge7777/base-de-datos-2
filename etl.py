@@ -18,7 +18,7 @@ numeric_columns = ["IUCR", "District", "CommunityArea"]
 for col in numeric_columns :
     df[col] = pd.to_numeric(df[col], errors="coerce")
 
-df = df.dropna(subest = "IUCR")
+df = df.dropna(subset = "IUCR")
 
 text_columns = ["Description", "LocationDescription"]
 for col in text_columns :
