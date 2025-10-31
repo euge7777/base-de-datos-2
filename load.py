@@ -8,8 +8,19 @@ PORT = "3306"
 DB = "crimenes_db_clean"
 
 engine = create_engine(f"mysql+pymysql://{USER}:{PWD}@{HOST}:{PORT}/{DB}")
-                       
-df.to_sql("crimenes", con = engine, if_exists = "replace", index = False)
 
-print("Datos cargados correctamente")
+df = pd.read_excel("crimenes_db_clean.xlsx", sheet_name = "Crimenes")
+
+dim_fecha = (
+    df[["Year", "Month", "Day"]]
+)
+dim_fecha.to_sql("dim_fecha", con = engine, if_exists = "append", index = False)
+
+dim_hora = (
+    df[["Time"]]
+)
+dim_hora.to_sql("dim_hora", con = engine, if_exists = "append", index = False)
+
+
+print("Datos cargados correctamente") 
 
