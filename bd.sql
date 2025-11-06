@@ -21,7 +21,8 @@ CREATE TABLE dim_hora (
 CREATE TABLE dim_ubicacion (
     id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
     district INT,
-    community_area INT
+    community_area INT, 
+    location_description VARCHAR(255)
 );
 
 -- Tabla de tipo de crimen (dimensión)
@@ -29,7 +30,6 @@ CREATE TABLE dim_tipo (
     id_tipo INT AUTO_INCREMENT PRIMARY KEY,
     iucr VARCHAR(10),
     description VARCHAR(255),
-    location_description VARCHAR(255)
 );
 
 -- Tabla de arresto (dimensión)
