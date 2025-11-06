@@ -17,6 +17,9 @@ df["Year"] = pd.to_numeric(df["Year"], errors = "coerce" ).astype("Int64")
 df["Month"] = pd.to_numeric(df["Month"], errors = "coerce" ).astype("Int64")
 df["Day"] = pd.to_numeric(df["Day"], errors = "coerce" ).astype("Int64")
 
+df["Latitude"] = pd.to_numeric(df["Latitude"], errors="coerce")
+df["Longitude"] = pd.to_numeric(df["Longitude"], errors="coerce")
+
 df["Time"] = pd.to_datetime(df["Time"], format="%H:%M:%S", errors="coerce").dt.time
 
 df["Description"] = df["Description"].astype(str).str.upper()
