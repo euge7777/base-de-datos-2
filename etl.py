@@ -4,7 +4,7 @@ import pandas as pd
 df_copia = pd.read_csv("crimenes_db.csv")
 df = df_copia.copy()
 
-df = df.drop(columns=["PrimaryType", "Latitude", "Longitude", "Location", "XCoordinate", "YCoordinate", "FBICode", "Beat", "Ward", "Block", "Year"])
+df = df.drop(columns=["PrimaryType", "Latitude", "Longitude", "Location", "XCoordinate", "YCoordinate", "FBICode", "Beat", "Ward", "Block", "Year", "Domestic", "ID"])
 
 df = df.rename(columns={"date_only": "Date"})
 

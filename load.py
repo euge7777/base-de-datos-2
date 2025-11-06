@@ -55,16 +55,16 @@ dim_hora.to_sql("dim_hora", con = engine, if_exists = "append", index = False)
 hora_db = pd.read_sql("SELECT id_hora, time FROM dim_hora", con = engine)
 
 dim_ubicacion = (
-    df[["District", "CommunnityArea"]]
+    df[["District", "CommunnityArea", "LocationDescription"]]
 )
 dim_ubicacion.to_sql("dim_ubicacion", con = engine, if_exists = "append", index = False)
-ubicacion_db = pd.read_sql("SELECT id_ubicacion, district, community_area FROM dim_ubicacion", con = engine)
+ubicacion_db = pd.read_sql("SELECT id_ubicacion, district, community_area, location_description FROM dim_ubicacion", con = engine)
 
 dim_tipo = (
-    df[["IUCR", "Description", "LocationDescription"]]
+    df[["IUCR", "Description"]]
 )
 dim_tipo.to_sql("dim_tipo", con = engine, if_exists = "append", index = False)
-tipo_db = pd.read_sql("SELECT id_tipo, iucr, description, location_description FROM dim_tipo", con = engine)
+tipo_db = pd.read_sql("SELECT id_tipo, iucr, description FROM dim_tipo", con = engine)
 
 dim_arresto = (
     df[["Arrest"]]
@@ -91,15 +91,15 @@ df_hecho_crimenes = df_hecho_crimenes.merge(
 df_hecho_crimenes = df_hecho_crimenes.merge(
     ubicacion_db,
     how = "left",
-    left_on = ["District", "CommunityArea"],
-    right_on = ["district", "community_area"]
+    left_on = ["District", "CommunityArea", "LocationDescription"],
+    right_on = ["district", "community_area", "location_description"]
 )
 
 df_hecho_crimenes = df_hecho_crimenes.merge(
     tipo_db,
     how = "left",
-    left_on = ["IUCR", "Description", "LocationDescription"],
-    right_on = ["iucr", "description", "location_description"]
+    left_on = ["IUCR", "Description"],
+    right_on = ["iucr", "description"]
 )
 
 df_hecho_crimenes = df_hecho_crimenes.merge(
