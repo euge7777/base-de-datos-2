@@ -4,7 +4,7 @@ import pandas as pd
 df_copia = pd.read_csv("crimenes_db.csv")
 df = df_copia.copy()
 
-df = df.drop(columns=["PrimaryType", "Latitude", "Longitude", "Location", "XCoordinate", "YCoordinate", "FBICode", "Beat", "Ward", "Block", "Year"])
+df = df.drop(columns=["PrimaryType", "Latitude", "Longitude", "Location", "XCoordinate", "YCoordinate", "FBICode", "Beat", "Ward", "Block", "Year", "UpdatedOn"])
 
 df = df.rename(columns={"date_only": "Date"})
 
@@ -27,10 +27,6 @@ for col in text_columns :
 for col in text_columns :
     df[col] = df[col].str.replace(r"\s*,\s*", ", ", regex = True)
     df[col] = df[col].str.replace(r"\s*-\s*", " - ", regex = True)
-
-df = df.rename(columns={"UpdatedOn": "Updated_Date"})
-df["Updated_Date"] = pd.to_datetime(df["Updated_Date"], errors="coerce")
-df["Updated_Date"] = df["Updated_Date"].dt.date
 
 df = df.rename(columns = {"time_only" : "Time"})
 df["Time"] = pd.to_datetime(df["Time"], format="%H:%M:%S", errors="coerce").dt.time
