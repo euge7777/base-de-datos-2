@@ -14,6 +14,8 @@ df["Year"] = df["Date"].dt.year
 df["Month"] = df["Date"].dt.month
 df["Day"] = df["Date"].dt.day
 
+df = df.drop(columns=["Date"])
+
 numeric_columns = ["IUCR", "District", "CommunityArea", "Latitude", "Longitude"]
 for col in numeric_columns :
     df[col] = pd.to_numeric(df[col], errors="coerce")
