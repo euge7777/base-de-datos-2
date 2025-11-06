@@ -22,7 +22,9 @@ CREATE TABLE dim_ubicacion (
     id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
     district INT,
     community_area INT, 
-    location_description VARCHAR(255)
+    location_description VARCHAR(255),
+    latitude DECIMAL(10,8),
+    longitude DECIMAL(10,8)
 );
 
 -- Tabla de tipo de crimen (dimensión)
