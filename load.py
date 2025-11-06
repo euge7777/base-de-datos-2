@@ -55,7 +55,7 @@ dim_hora = df[["Time"]].rename(columns={
 }).drop_duplicates()
 dim_hora.to_sql("dim_hora", con=engine, if_exists="append", index=False)
 hora_db = pd.read_sql("SELECT id_hora, time FROM dim_hora", con=engine)
-hora_db['time'] = pd.to_datetime(hora_db['time'], format="%H:%M:%S").dt.strftime("%H:%M:%S")
+hora_db['time'] = hora_db['time'].apply(lambda x: str(x).split()[-1] if pd.notnull(x) else None)
 
 dim_ubicacion = df[["District","CommunityArea","LocationDescription","Latitude","Longitude"]].rename(columns={
 "District":"district",
