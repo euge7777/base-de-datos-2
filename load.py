@@ -19,8 +19,8 @@ df["Day"] = pd.to_numeric(df["Day"], errors = "coerce" ).astype("Int64")
 
 df["Time"] = pd.to_datetime(df["Time"], format="%H:%M:%S", errors="coerce").dt.time
 
-df["Description"] = df["Description"].astypr(str).str.upper()
-df["LocationDescription"] = df["LocationDescription"].astypr(str).str.upper()
+df["Description"] = df["Description"].astype(str).str.upper()
+df["LocationDescription"] = df["LocationDescription"].astype(str).str.upper()
 
 df["Description"] = df["Description"].str.replace(r"\s*,\s*", ", ", regex=True)
 df["LocationDescription"] = df["LocationDescription"].str.replace(r"\s*,\s*", ", ", regex=True)
@@ -46,7 +46,7 @@ dim_fecha = (
     df[["Year", "Month", "Day"]]
 )
 dim_fecha.to_sql("dim_fecha", con = engine, if_exists = "append", index = False)
-fecha_db = pd.read_sql("SELECT id_fecha, year, month, day, FROM dim_fecha", con = engine)
+fecha_db = pd.read_sql("SELECT id_fecha, year, month, day FROM dim_fecha", con = engine)
 
 dim_hora = (
     df[["Time"]]
@@ -55,13 +55,13 @@ dim_hora.to_sql("dim_hora", con = engine, if_exists = "append", index = False)
 hora_db = pd.read_sql("SELECT id_hora, time FROM dim_hora", con = engine)
 
 dim_ubicacion = (
-    df[["District", "ComunnityArea"]]
+    df[["District", "CommunnityArea"]]
 )
 dim_ubicacion.to_sql("dim_ubicacion", con = engine, if_exists = "append", index = False)
 ubicacion_db = pd.read_sql("SELECT id_ubicacion, district, community_area FROM dim_ubicacion", con = engine)
 
 dim_tipo = (
-    df[["IUCR", "Description", "LocationDesciption"]]
+    df[["IUCR", "Description", "LocationDescription"]]
 )
 dim_tipo.to_sql("dim_tipo", con = engine, if_exists = "append", index = False)
 tipo_db = pd.read_sql("SELECT id_tipo, iucr, description, location_description FROM dim_tipo", con = engine)
