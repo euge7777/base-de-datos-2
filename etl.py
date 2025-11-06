@@ -41,4 +41,4 @@ df.to_csv("crimenes_db_clean.csv", index = False)
 
 df.to_excel("crimenes_db_clean.xlsx", index = False)
 
-print("ETL compltado. Archivo generado con exito")
+print("ETL completado. Archivos generados con exito")
