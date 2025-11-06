@@ -9,8 +9,7 @@ DB = "crimenes_db_clean"
 
 engine = create_engine(f"mysql+pymysql://{USER}:{PWD}@{HOST}:{PORT}/{DB}")
 
-df = pd.read_excel("crimenes_db_clean.xlsx", sheet_name = "Crimenes")
-
+df = pd.read_excel("crimenes_db_clean.xlsx", sheet_name = "Sheet1") 
 df = df.drop_duplicates(subset = ["CaseNumber"])
 
 df["Year"] = pd.to_numeric(df["Year"], errors = "coerce" ).astype("Int64")
